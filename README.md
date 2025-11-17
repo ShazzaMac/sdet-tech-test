@@ -28,14 +28,14 @@ Select E2E Testing and choose your browser.
 sdet-tech-test/
 ├── cypress/
 │   └── e2e/
-│       └── popup.cy.ts       # Test specifications
+│       └── locationPopup.cy.ts       # Test specifications
 ├── cypress.config.ts          # Cypress configuration
 ├── tsconfig.json             # TypeScript configuration
 └── package.json              # Dependencies and scripts
 ```
 
 ## Current Test Coverage
-- `popup.cy.ts` - Verifies location popup appears on Bright SG homepage
+- `locationPopup.cy.ts` - Verifies location popup appears on Bright SG homepage
 
 ## Task
 Expand this framework by adding:

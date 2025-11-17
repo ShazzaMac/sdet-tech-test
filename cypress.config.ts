@@ -7,5 +7,9 @@ export default defineConfig({
     viewportHeight: 720,
     video: false,
     screenshotOnRunFailure: true,
+    env: {
+      ukUrl: 'https://brightsg.com/',
+      irelandUrl: 'https://brightsg.com/en-ie/',
+    },
   },
 });
