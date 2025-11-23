@@ -1,28 +1,35 @@
-//This page is used to define selectors and methods for interacting with the Home Page of the Brightsg website.
-//It promotes code reusability and maintainability through the Page Object Model (POM) design pattern.
+// Page Object for BrightSG homepage
+// Handles location popup, cookies, and provides hero selectors
 
-export class HomePage {
+
+class HomePage {
   visit() {
-    cy.visit("https://brightsg.com/");
-  }
+    cy.visit("https://brightsg.com");
 
-  closeLocationPopup() {
-    cy.get('div[role="dialog"]').within(() => {
-      cy.contains("Close").click({ force: true });
+    // --- Close Region Modal ---
+    cy.get("div[role='dialog']", { timeout: 8000 }).then(($modal) => {
+      if ($modal.length > 0) {
+        cy.contains("United Kingdom").click({ force: true });
+      }
     });
+
+    // --- Accepst Cookie Banner ---
+    cy.contains("Accept All Cookies", { timeout: 8000 }).then(($btn) => {
+      if ($btn.length > 0) {
+        cy.wrap($btn).click({ force: true });
+      }
+    });
+
+    cy.wait(500); // ensure UI settles before further actions
   }
 
+  // Robust hero selector with multiple fallbacks
   heroSection() {
-    return cy.get("section").first();
-  }
-
-  newsletterEmail() {
-    return cy.get('input[type="email"]');
-  }
-
-  signUpButton() {
-    return cy.contains("Sign-Up");
+    return cy.get(
+      "div[class*='Hero'], div[class*='hero'], div[class*='banner']",
+      { timeout: 10000 }
+    ).first();
   }
 }
 
-
+export const home = new HomePage();
