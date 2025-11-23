@@ -2,9 +2,11 @@
 // Handles location popup, cookies, and provides hero selectors
 
 
-class HomePage {
+ export class HomePage {
   visit() {
     cy.visit("https://brightsg.com");
+
+    
 
     // --- Close Region Modal ---
     cy.get("div[role='dialog']", { timeout: 8000 }).then(($modal) => {
@@ -13,13 +15,16 @@ class HomePage {
       }
     });
 
-    // --- Accepst Cookie Banner ---
-    cy.contains("Accept All Cookies", { timeout: 8000 }).then(($btn) => {
-      if ($btn.length > 0) {
+
+   // --- Accept Cookie Banner ---
+    cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).then(($btn) => {
+      if ($btn.is(':visible')) {
         cy.wrap($btn).click({ force: true });
       }
     });
 
+    // Waits until banner is hidden
+    cy.get('#onetrust-accept-btn-handler').should('not.be.visible');
     cy.wait(500); // ensure UI settles before further actions
   }
 

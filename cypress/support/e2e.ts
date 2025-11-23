@@ -6,3 +6,10 @@ Cypress.on('uncaught:exception', (err) => {
   }
   return true;
 });
+
+// Sets navigator.language to 'en-GB' before the window loads
+Cypress.on('window:before:load', (win) => {
+  Object.defineProperty(win.navigator, 'language', {
+    get: () => 'en-GB',
+  });
+});

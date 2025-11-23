@@ -1,3 +1,4 @@
+// cypress/pages/NavigationPage.ts - POM for Navigation Page
 //This page is used to define selectors and methods for interacting with the Home Page of the Brightsg website.
 
 export class NavigationPage {
